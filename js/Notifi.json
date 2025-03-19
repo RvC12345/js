@@ -1,0 +1,17 @@
+{
+    "notifications": [
+        {
+            "id": 1,
+            "title": "Welcome!",
+            "message": "This is your first notification.",
+            "time": 1672531199000
+        },
+        {
+            "id": 2,
+            "title": "New Update",
+            "message": "Version 2.0 is now available!",
+            "time": 1672531299000
+        }
+    ],
+    "lastUpdatedTime": 1672531299000
+}
