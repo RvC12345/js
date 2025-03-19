@@ -11,7 +11,13 @@
             "title": "New Update",
             "message": "Version 2.0 is now available!",
             "time": 1672531299000
+        },
+        {
+            "id": 2,
+            "title": "New Update",
+            "message": "Version 3.0 is now available!",
+            "time": 1672531299002
         }
     ],
-    "lastUpdatedTime": 1672531299000
+    "lastUpdatedTime": 1672531299002
 }
