@@ -78,7 +78,7 @@ const RxPlayer=(()=>{
       function(){
         const n=document.createElement("div");
         n.className="player-container-rx hidden",
-        n.innerHTML='<div class="video-player" id="videoPlayer">\n         \x3c!-- <div class="zoom-layer"></div> --\x3e\n         <div class="overlay show">\n         <div class="player-title marquee">\n          <p class="playerTt"></p>\n      </div>\n      <button class="close-btn" onclick="RxPlayer.closePlayer()">×</button>\n       <div class="tap-zone left-zone" >\n              <span onclick="RxPlayer.skip(-10)" class="material-icons skipBs" >replay_10</span>\n      </div>\n      <div class="tap-zone middle-zone">\n           <span onclick="RxPlayer.togglePlayPause()" class="material-icons skipBs" id="playPauseIcon">play_arrow</span>   \n      </div>\n      <div class="tap-zone right-zone" >\n              <span onclick="RxPlayer.skip(10)" class="material-icons skipBs" >forward_10</span>\n      </div>\n    \n    </div>\n    <div class="video-holder">\n       <video id="myVideo" src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"></video>\n    </div>\n    <div class="controls show" id="controls">\n      <button onclick="RxPlayer.togglePlayPause()">\n        <span class="material-icons" id="playPauseIcon_c">play_arrow</span>\n      </button>\n      <div class="time" id="currentTime">0:00</div>\n      <div class="progress-container" onclick="RxPlayer.seek(event)">\n        <div class="progress-bar" id="progressBar"></div>\n      </div>\n      <div class="time" id="duration">0:00</div>\n      <button >\n        <span class="material-icons" id="muteIcon">volume_up</span>\n      </button>\n      <button >\n        <span class="material-icons" id="fullscreenIcon">fullscreen</span>\n      </button>\n    </div>\n    </div>',
+        n.innerHTML='<div class="video-player" id="videoPlayer">\n         \x3c!-- <div class="zoom-layer"></div> --\x3e\n         <div class="overlay show">\n         <div class="player-title marquee">\n          <p class="playerTt"></p>\n      </div>\n      <button class="close-btn" onclick="RxPlayer.closePlayer()">×</button>\n       <div class="tap-zone left-zone" >\n              <span onclick="RxPlayer.skip(-10)" class="material-icons skipBs" >replay_10</span>\n      </div>\n      <div class="tap-zone middle-zone">\n           <span onclick="RxPlayer.togglePlayPause()" class="material-icons skipBs" id="playPauseIcon">play_arrow</span>   \n      </div>\n      <div class="tap-zone right-zone" >\n              <span onclick="RxPlayer.skip(10)" class="material-icons skipBs" >forward_10</span>\n      </div>\n    \n    </div>\n    <div class="video-holder">\n       <video id="myVideo" src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"></video>\n    </div>\n    <div class="controls show" id="controls-rx">\n      <button onclick="RxPlayer.togglePlayPause()">\n        <span class="material-icons" id="playPauseIcon_c">play_arrow</span>\n      </button>\n      <div class="time" id="currentTime-rx">0:00</div>\n      <div class="progress-container" onclick="RxPlayer.seek(event)">\n        <div class="progress-bar" id="progressBar"></div>\n      </div>\n      <div class="time" id="duration">0:00</div>\n      <button >\n        <span class="material-icons" id="muteIcon">volume_up</span>\n      </button>\n      <button >\n        <span class="material-icons" id="fullscreenIcon">fullscreen</span>\n      </button>\n    </div>\n    </div>',
         document.body.appendChild(n)
       }(),
         
@@ -96,11 +96,11 @@ const RxPlayer=(()=>{
           playPauseIconC:document.getElementById("playPauseIcon_c"),
           muteIcon:document.getElementById("muteIcon"),
           fullscreenIcon:document.getElementById("fullscreenIcon"),
-          currentTime:document.getElementById("currentTime"),
+          currentTime:document.getElementById("currentTime-rx"),
           duration:document.getElementById("duration"),
           progressBar:document.getElementById("progressBar"),
           progressContainer:document.querySelector(".progress-container"),
-          controls:document.getElementById("controls"),
+          controls:document.getElementById("controls-rx"),
           overlay:document.querySelector(".overlay"),
           videoPlayer:document.getElementById("videoPlayer"),
           playerTitle:document.querySelector(".player-title"),
