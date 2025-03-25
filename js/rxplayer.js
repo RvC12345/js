@@ -92,4 +92,108 @@ const RxPlayer=(()=>{
         t={
           container:document.querySelector(".player-container"),
           video:document.getElementById("myVideo"),
-          playPauseIcon:document.getElementById("playPauseIcon"),playPauseIconC:document.getElementById("playPauseIcon_c"),muteIcon:document.getElementById("muteIcon"),fullscreenIcon:document.getElementById("fullscreenIcon"),currentTime:document.getElementById("currentTime"),duration:document.getElementById("duration"),progressBar:document.getElementById("progressBar"),progressContainer:document.querySelector(".progress-container"),controls:document.getElementById("controls"),overlay:document.querySelector(".overlay"),videoPlayer:document.getElementById("videoPlayer"),playerTitle:document.querySelector(".player-title"),playerTitleText:document.querySelector(".playerTt")};const{video:e,controls:o,overlay:c,videoPlayer:d}=t;function y(){var{video:n}=t;a=!1,i=setTimeout((()=>{a=!0,console.log("speed 2"),n.playbackRate=2}),500)}function v(){var{video:n}=t;clearTimeout(i),a&&(console.log("speed 1"),n.playbackRate=1)}e.addEventListener("timeupdate",s),e.addEventListener("loadedmetadata",r),e.addEventListener("ended",f),e.addEventListener("click",l),d.addEventListener("mousedown",y),d.addEventListener("mouseup",v),d.addEventListener("touchstart",y),d.addEventListener("touchend",v),t.videoPlayer.addEventListener("mousemove",h),t.progressContainer.addEventListener("click",m),t.muteIcon.addEventListener("click",u),t.fullscreenIcon.addEventListener("click",p),n.zoom&&function(){var{overlay:n,video:e}=t;let o=1,i=!1,a=0,s=0,r=0,c=0,l=0,d=0;function u(n){if(i)o=1,r=0,c=0;else{o=2;const t=e.getBoundingClientRect(),i=n.changedTouches[0].clientX-t.left,a=n.changedTouches[0].clientY-t.top;r=-(i-t.width/2)*(o-1),c=-(a-t.height/2)*(o-1)}i=!i,m()}function p(n){const e=n[0].pageX-n[1].pageX,t=n[0].pageY-n[1].pageY;return Math.sqrt(e*e+t*t)}function m(){o>=1&&(e.style.transform=`scale(${o}) translate(${r/o}px, ${c/o}px)`)}n.addEventListener("touchend",(n=>{if(n.touches.length>0)return;const e=(new Date).getTime(),t=e-d;t<300&&t>0&&u(n),d=e})),n.addEventListener("touchstart",(n=>{if(2===n.touches.length)l=p(n.touches);else if(1===n.touches.length&&i){const e=n.touches[0];a=e.pageX-r,s=e.pageY-c}})),n.addEventListener("touchmove",(n=>{if(2===n.touches.length){const e=p(n.touches),t=e/l;o=Math.min(Math.max(o*t,1),3),l=e,m()}else if(1===n.touches.length&&i){n.preventDefault();const t=n.touches[0];r=t.pageX-a,c=t.pageY-s;const i=(o-1)*e.offsetWidth/2,l=(o-1)*e.offsetHeight/2;r=Math.max(-i,Math.min(i,r)),c=Math.max(-l,Math.min(l,c)),m()}})),n.addEventListener("touchend",(n=>{n.touches.length<2&&(l=0)}))}();o.addEventListener("mouseleave",g)}(c),function(){if(!document.querySelector('link[href*="material-icons"]')){const n=document.createElement("link");n.rel="stylesheet",n.href="https://fonts.googleapis.com/icon?family=Material+Icons",document.head.appendChild(n),console.log("Google Material Icons added to the document.")}let n=document.querySelector('meta[name="viewport"]');n?n.content.includes("user-scalable=no")?console.log('Meta viewport tag already contains "user-scalable=no".'):(n.content=n.content.replace(/user-scalable\s*=\s*yes|user-scalable\s*=\s*no/gi,"user-scalable=no"),n.content.includes("user-scalable")||(n.content+=", user-scalable=no"),console.log('Meta viewport tag updated with "user-scalable=no".')):(n=document.createElement("meta"),n.name="viewport",n.content="width=device-width, initial-scale=1, user-scalable=no",document.head.appendChild(n),console.log('Meta viewport tag added with "user-scalable=no".'))}(),document.body.style.margin="0px"},load:function({src:n,poster:e="",title:o=""}){const{video:i,playerTitle:a,playerTitleText:s}=t;i.src=n,i.poster=e,s.textContent=o,a.style.display=o?"block":"none",f(),function(){var{container:n,video:e}=t;n.classList.remove("hidden")}(),i.load(),t.currentTime.textContent="0:00",t.progressBar.style.width="0%"},skip:function(n){t.video.currentTime+=n},togglePlayPause:l,seek:m,closePlayer:function(){var{container:n,video:e}=t;n.classList.add("hidden"),e.paused||e.pause()}}})();
+          playPauseIcon:document.getElementById("playPauseIcon"),
+          playPauseIconC:document.getElementById("playPauseIcon_c"),
+          muteIcon:document.getElementById("muteIcon"),
+          fullscreenIcon:document.getElementById("fullscreenIcon"),
+          currentTime:document.getElementById("currentTime"),
+          duration:document.getElementById("duration"),
+          progressBar:document.getElementById("progressBar"),
+          progressContainer:document.querySelector(".progress-container"),
+          controls:document.getElementById("controls"),
+          overlay:document.querySelector(".overlay"),
+          videoPlayer:document.getElementById("videoPlayer"),
+          playerTitle:document.querySelector(".player-title"),
+          playerTitleText:document.querySelector(".playerTt")
+        };
+        const{
+          video:e,
+          controls:o,
+          overlay:c,
+          videoPlayer:d
+        }=t;
+        
+        function y(){
+          var{video:n}=t;
+          a=!1,i=setTimeout((()=>{
+            a=!0,console.log("speed 2"),n.playbackRate=2}),500)
+        }
+        
+        function v(){
+          var{video:n}=t;
+          clearTimeout(i),a&&(console.log("speed 1"),n.playbackRate=1)
+        }
+        
+        e.addEventListener("timeupdate",s),
+        e.addEventListener("loadedmetadata",r),
+        e.addEventListener("ended",f),
+        e.addEventListener("click",l),
+        d.addEventListener("mousedown",y),
+          
+        d.addEventListener("mouseup",v),
+        d.addEventListener("touchstart",y),
+        d.addEventListener("touchend",v),
+        t.videoPlayer.addEventListener("mousemove",h),
+        t.progressContainer.addEventListener("click",m),
+        t.muteIcon.addEventListener("click",u),
+        t.fullscreenIcon.addEventListener("click",p),
+        n.zoom && function(){
+          var{overlay:n,video:e}=t;
+          let o=1,i=!1,a=0,s=0,r=0,c=0,l=0,d=0;
+          function u(n){
+            if(i)o=1,r=0,c=0;
+            else{
+              o=2;
+              const t=e.getBoundingClientRect(),
+              i=n.changedTouches[0].clientX-t.left,a=n.changedTouches[0].clientY-t.top;r=-(i-t.width/2)*(o-1),c=-(a-t.height/2)*(o-1)}i=!i,m()
+          }
+          function p(n){
+            const e=n[0].pageX-n[1].pageX,t=n[0].pageY-n[1].pageY;return Math.sqrt(e*e+t*t)
+          }
+          function m(){
+            o>=1&&(e.style.transform=`scale(${o}) translate(${r/o}px, ${c/o}px)`)
+          }
+          n.addEventListener("touchend",(n=>{if(n.touches.length>0)return;const e=(new Date).getTime(),t=e-d;t<300&&t>0&&u(n),d=e})),
+          n.addEventListener("touchstart",(n=>{if(2===n.touches.length)l=p(n.touches);else if(1===n.touches.length&&i){const e=n.touches[0];a=e.pageX-r,s=e.pageY-c}})),
+          n.addEventListener("touchmove",(n=>{if(2===n.touches.length){const e=p(n.touches),t=e/l;o=Math.min(Math.max(o*t,1),3),l=e,m()}else if(1===n.touches.length&&i){n.preventDefault();const t=n.touches[0];r=t.pageX-a,c=t.pageY-s;const i=(o-1)*e.offsetWidth/2,l=(o-1)*e.offsetHeight/2;r=Math.max(-i,Math.min(i,r)),c=Math.max(-l,Math.min(l,c)),m()}})),
+          n.addEventListener("touchend",(n=>{n.touches.length<2&&(l=0)}))}();
+        o.addEventListener("mouseleave",g)
+      }(c),
+        
+      function(){
+        if(!document.querySelector('link[href*="material-icons"]')){
+          const n=document.createElement("link");
+          n.rel="stylesheet",
+          n.href="https://fonts.googleapis.com/icon?family=Material+Icons",
+          document.head.appendChild(n),
+          console.log("Google Material Icons added to the document.")
+        }
+        let n=document.querySelector('meta[name="viewport"]');
+        n?n.content.includes("user-scalable=no")?console.log('Meta viewport tag already contains "user-scalable=no".'):(n.content=n.content.replace(/user-scalable\s*=\s*yes|user-scalable\s*=\s*no/gi,"user-scalable=no"),n.content.includes("user-scalable")||(n.content+=", user-scalable=no"),console.log('Meta viewport tag updated with "user-scalable=no".')):(n=document.createElement("meta"),n.name="viewport",n.content="width=device-width, initial-scale=1, user-scalable=no",
+                                                                                                                                                                                                                                                                                                                                                                   document.head.appendChild(n),console.log('Meta viewport tag added with "user-scalable=no".'))}(),
+        document.body.style.margin="0px"
+    },
+    
+    load:function({src:n,poster:e="",title:o=""}){
+      const{video:i,playerTitle:a,playerTitleText:s}=t;
+      i.src=n,
+        
+      i.poster=e,
+      s.textContent=o,
+      a.style.display=o?"block":"none",
+      f(),
+      function(){
+        var{container:n,video:e}=t;
+        n.classList.remove("hidden")
+      }(),
+      i.load(),
+      t.currentTime.textContent="0:00",
+      t.progressBar.style.width="0%"
+    },
+    
+    skip:function(n){
+      t.video.currentTime+=n},togglePlayPause:l,seek:m,
+    closePlayer:function(){
+      var{container:n,video:e}=t;n.classList.add("hidden"),e.paused||e.pause()
+    }
+  }})();
