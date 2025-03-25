@@ -2,7 +2,7 @@ const RxPlayer=(()=>{
   let n,e,t={};
   const o={zoom:!0};
   let i,a=!1;
-  
+  let ResumeTime = 300;
   function s(){
     const{video:n,currentTime:e,duration:o,progressBar:i}=t;
     e.textContent=c(n.currentTime),
@@ -174,10 +174,29 @@ const RxPlayer=(()=>{
         document.body.style.margin="0px"
     },
     
-    load:function({src:n,poster:e="",title:o=""}){
+    resume:function(){
+      j=localStorage.getItem("RxPlayerH");
+      if(j){
+        try{
+          pj=JSON.parse(j);
+          if(pj.ctime>=ResumeTime){
+            return pj;
+          }else{
+            return null
+          }
+        }catch(ee){
+          console.log(`${ee}`);
+          return null;
+        }
+      }else{
+        return null;
+      }
+    },
+    
+    load:function({src:n,poster:e="",title:o="",currentTime:ct=0}){
       const{video:i,playerTitle:a,playerTitleText:s}=t;
       i.src=n,
-        
+      i.currentTime = ct,
       i.poster=e,
       s.textContent=o,
       a.style.display=o?"block":"none",
@@ -187,7 +206,7 @@ const RxPlayer=(()=>{
         n.classList.remove("hidden")
       }(),
       i.load(),
-      t.currentTime.textContent="0:00",
+      t.currentTime.textContent= ct ? ct:"0:00",
       t.progressBar.style.width="0%"
     },
     
