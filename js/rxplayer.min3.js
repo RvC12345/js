@@ -24,8 +24,22 @@ const RxPlayer=(()=>{
     t.duration.textContent=c(t.video.duration)
   }
   
-  function c(n){
-    const e=Math.floor(n/60),t=Math.floor(n%60);return`${e}:${t<10?"0":""}${t}`
+  function c_old(n){
+    const e=Math.floor(n/60),
+    t=Math.floor(n%60);
+    return`${e}:${t<10?"0":""}${t}`
+  }
+
+  function c(seconds) {
+    let hh = Math.floor(seconds / 3600);
+    let mm = Math.floor((seconds % 3600) / 60);
+    let ss = seconds % 60;
+
+    if (hh > 0) {
+        return `${String(hh).padStart(2, '0')}:${String(mm).padStart(2, '0')}:${String(ss).padStart(2, '0')}`;
+    } else {
+        return `${String(mm).padStart(2, '0')}:${String(ss).padStart(2, '0')}`;
+    }
   }
   
   function l(){
