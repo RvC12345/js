@@ -98,7 +98,247 @@ const RxPlayer=(()=>{
         
       function(){
         const n=document.createElement("style");
-        n.textContent=`\n    .marquee {\n      width: 100%; /* Full width of the container */\n      overflow: hidden; /* Hide anything outside the container */\n      background: #121212; /* Background color */\n      color: white; /* Text color */\n    }\n    .marquee p {\n      display: inline-block;\n      white-space: nowrap; /* Prevent the text from wrapping */\n      padding-left: 100%; /* Start the text from outside the container */\n      animation: marquee-animation 10s linear infinite; /* Animation of the marquee */\n      margin:0px;\n    }\n\n    @keyframes marquee-animation {\n      0% {\n        transform: translateX(0%); /* Start off-screen to the right */\n      }\n      100% {\n        transform: translateX(-100%); /* Move the text off-screen to the left */\n       }\n    }\n\n    .player-container-rx {\n      z-index:${e};\n      position:fixed;\n      top:0px;\n      left:0px;\n      margin: 0;\n      padding: 0;\n      height: 100%;\n      display: flex;\n      align-items: center;\n      justify-content: center;\n      background: #121212;\n    }\n\n    /* Full-screen video player container */\n    .video-player {\n      z-index:${e+6};\n      position: relative;\n      width: 100%;\n      max-width: 800px;\n      background: #181818;\n      border-radius: 8px;\n      overflow: hidden;\n      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);\n    }\n\n    /* Close button */\n    .close-btn {\n      position: absolute;\n      top: 10px;\n      right: 10px;\n      background: #f44336;\n      color: #fff;\n      border: none;\n      border-radius: 50%;\n      width: 30px;\n      height: 30px;\n      display: flex;\n      align-items: center;\n      justify-content: center;\n      font-size: 16px;\n      cursor: pointer;\n      outline: none;\n      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);\n      transition: background 0.3s ease;\n      z-index: ${e+7};\n    }\n\n    .close-btn:hover {\n      background: #d32f2f;\n    }\n    .video-holder{\n        display:flex;\n        justify-content: center;\n        align-items: center;\n        width: 100%;\n        height: 100%;\n    }\n    /* Video element */\n    video {\n      width: 100vw;\n      height: 100vh;\n      display: block;\n      \n    }\n\n    /* Controls container */\n    .controls {\n      display: flex;\n      align-items: center;\n      background: #000;\n      padding: 10px 5px;\n      position: absolute;\n      bottom: 0;\n      width: 100%;\n      opacity: 0;\n      transition: opacity 0.3s ease;\n      z-index: ${e+7};\n    }\n\n    .controls.show {\n      opacity: 1;\n    }\n\n    /* Buttons */\n    .controls button {\n      background: none;\n      color: #fff;\n      border: none;\n      font-size: 24px;\n      margin: 0 5px;\n      cursor: pointer;\n      transition: color 0.3s ease;\n    }\n\n    .controls button:hover {\n      color: #f44336;\n    }\n\n    /* Time display */\n    .time {\n      color: #fff;\n      font-size: 14px;\n      margin-left: 10px;\n      margin-right: 10px;\n    }\n\n    /* Progress bar */\n    .progress-container {\n      flex: 1;\n      height: 5px;\n      background: #333;\n      border-radius: 2.5px;\n      cursor: pointer;\n      margin: 0 10px;\n      position: relative;\n    }\n\n    .progress-bar {\n      width: 0%;\n      height: 100%;\n      background: #f44336;\n      border-radius: 2.5px;\n      position: absolute;\n    }\n    \n    .overlay {\n      position: absolute;\n      top: 0;\n      left: 0;\n      width: 100%;\n      height: 100%;\n      z-index: ${e+5};\n      display:flex;\n      opacity:0;\n      transition: opacity 0.3s ease;\n    }\n    \n    .overlay.show{\n        opacity:1;\n    }\n\n    .tap-zone {\n      /* position: absolute; */\n      display:flex;\n      justify-content:center;\n      align-items:center;\n      top: 0;\n      bottom: 0;\n      width: 33.3%;\n      height: 100%;\n      /* cursor: pointer; */\n    }\n    .zoom-layer{\n        position: absolute;\n        width:100%;\n        height:100%;\n        top:0px;\n        left:0px;\n        z-index:${e+6};\n    }\n    .tap-zone div{\n        width: 15vw;\n        height: 10vh;\n        background: green;\n        \n        \n    }\n    .left-zone {\n      left: 0;\n    }\n\n    .right-zone {\n      right: 0;\n    }\n\n     .tap-feedback {\n      position: absolute;\n      color: white;\n      font-size: 20px;\n      animation: fadeOut 1s ease-in-out;\n    }\n \n    @keyframes fadeOut {\n      from {\n        opacity: 1;\n      }\n      to {\n        opacity: 0;\n      }\n    }\n    .skipBs{\n        font-size:40px;\n        font-weight:500;\n        color:white;\n        padding:5px;\n        border-radius:50%;\n        /* background: #555; */\n        background:rgba(0, 0, 0, 0.5);\n        user-select: none;\n    }\n    #playPauseIcon{\n        padding:10px;\n    }\n    .player-title{\n        position:absolute;\n        font-size:20px;\n        font-weight:900;\n        color:white;\n        background:rgb(0,0,0,0.5);\n        padding:10px;\n        text-align:center;\n        width:100%;\n    }\n    .hidden{\n        display:none;\n    }\n    `,
+        n.textContent=`
+        .marquee {
+  width: 100%;
+  overflow: hidden;
+  background: #121212;
+  color: white;
+}
+
+.marquee p {
+  display: inline-block;
+  white-space: nowrap;
+  padding-left: 100%;
+  animation: marquee-animation 10s linear infinite;
+  margin: 0px;
+}
+
+@keyframes marquee-animation {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.player-container-rx {
+  z-index: 100;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #121212;
+}
+
+.video-player {
+  z-index: 106;
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  background: #181818;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #f44336;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s ease;
+  z-index: 107;
+}
+
+.close-btn:hover {
+  background: #d32f2f;
+}
+
+.video-holder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+video {
+  width: 100vw;
+  height: 100vh;
+  display: block;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  background: #000;
+  padding: 10px 5px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 107;
+}
+
+.controls.show {
+  opacity: 1;
+}
+
+.controls button {
+  background: none;
+  color: #fff;
+  border: none;
+  font-size: 24px;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.controls button:hover {
+  color: #f44336;
+}
+
+.time {
+  color: #fff;
+  font-size: 14px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.progress-container {
+  flex: 1;
+  height: 5px;
+  background: #333;
+  border-radius: 2.5px;
+  cursor: pointer;
+  margin: 0 10px;
+  position: relative;
+}
+
+.progress-bar {
+  width: 0%;
+  height: 100%;
+  background: #f44336;
+  border-radius: 2.5px;
+  position: absolute;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 105;
+  display: flex;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.overlay.show {
+  opacity: 1;
+}
+
+.tap-zone {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  bottom: 0;
+  width: 33.3%;
+  height: 100%;
+}
+
+.zoom-layer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: 106;
+}
+
+.tap-zone div {
+  width: 15vw;
+  height: 10vh;
+  background: green;
+}
+
+.left-zone {
+  left: 0;
+}
+
+.right-zone {
+  right: 0;
+}
+
+.tap-feedback {
+  position: absolute;
+  color: white;
+  font-size: 20px;
+  animation: fadeOut 1s ease-in-out;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.skipBs {
+  font-size: 40px;
+  font-weight: 500;
+  color: white;
+  padding: 5px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  user-select: none;
+}
+
+#playPauseIcon {
+  padding: 10px;
+}
+
+.player-title {
+  position: absolute;
+  font-size: 20px;
+  font-weight: 900;
+  color: white;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  text-align: center;
+  width: 100%;
+}
+
+.hidden {
+  display: none;
+}
+        `;
         document.head.appendChild(n)
       }(),
       
