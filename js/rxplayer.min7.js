@@ -446,10 +446,12 @@ video {
         return null;
       }
     },
+    
     getlast:function(){
       j=localStorage.getItem("RxPlayerH");
       return j ? JSON.parse(j):null;
-    }
+    },
+    
     load:function({src:n,poster:e="",title:o="",currentTime:ct=0}){
       const{video:i,playerTitle:a,playerTitleText:s}=t;
       i.src=n,
