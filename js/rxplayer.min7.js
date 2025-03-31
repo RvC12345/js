@@ -58,9 +58,34 @@ const RxPlayer=(()=>{
     e.textContent=n.muted?"volume_off":"volume_up"
   }
   
-  function p(){
+  function p_old(){
     const{videoPlayer:n,fullscreenIcon:e}=t;
     document.fullscreenElement?(document.exitFullscreen(),e.textContent="fullscreen"):(n.requestFullscreen(),e.textContent="fullscreen_exit")
+  }
+  
+  function p() {
+    const { videoPlayer: n, fullscreenIcon: e } = t;
+    if (document.fullscreenElement || document.webkitFullscreenElement) {
+        // Exit full-screen mode
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+        }
+        e.textContent = "fullscreen";
+    } else {
+        // Request full-screen mode
+        if (n.requestFullscreen) {
+            n.requestFullscreen();
+        } else if (n.webkitRequestFullscreen) { // Safari
+            n.webkitRequestFullscreen();
+        } else if (n.msRequestFullscreen) { // IE/Edge
+            n.msRequestFullscreen();
+        }
+        e.textContent = "fullscreen_exit";
+    }
   }
   
   function m(n){
